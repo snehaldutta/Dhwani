@@ -1,0 +1,13 @@
+# Local environment and caches
+.venv/
+__pycache__/
+.pytest_cache/
+
+# Personal data: folder list and anything saved at runtime
+data/
+
+# Debug output may hold personal audio
+debug-clips/
+
+# OS files
+.DS_Store

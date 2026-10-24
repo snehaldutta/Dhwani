@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dhwani: new note</title>
+    <link rel="icon" href="data:,">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.11/dist/index.global.js"></script>
+    <style type="text/tailwindcss">
+      @layer components {
+        .label {
+          @apply mb-1 block text-sm font-medium text-stone-700 dark:text-stone-300;
+        }
+        .field {
+          @apply w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-900 placeholder:text-stone-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100;
+        }
+        .btn-primary {
+          @apply inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2.5 font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed disabled:opacity-50;
+        }
+        .btn-quiet {
+          @apply inline-flex items-center justify-center rounded-lg border border-stone-300 px-3 py-1.5 text-sm font-medium text-red-700 transition hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 dark:border-stone-700 dark:text-red-400 dark:hover:bg-red-950/40;
+        }
+        .card {
+          @apply rounded-2xl bg-white p-6 shadow-sm ring-1 ring-stone-200 dark:bg-stone-900 dark:ring-stone-800;
+        }
+        #record {
+          @apply inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white px-4 py-2 font-semibold text-stone-800 transition hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed disabled:opacity-50 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-100 dark:hover:bg-stone-800;
+        }
+        #record::before {
+          content: "";
+          @apply size-2.5 rounded-full bg-red-500;
+        }
+        #record.recording {
+          @apply border-red-600 bg-red-600 text-white hover:bg-red-700;
+        }
+        #record.recording::before {
+          @apply bg-white animate-pulse;
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-stone-50 text-stone-900 antialiased dark:bg-stone-950 dark:text-stone-100">
+    <header class="mx-auto flex max-w-5xl items-center justify-between px-4 py-5">
+      <a href="/" class="flex items-center gap-2 font-semibold">
+        <span class="grid size-8 place-items-center rounded-lg bg-indigo-600 text-white" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        </span>
+        Dhwani
+      </a>
+      <a href="/" class="rounded-lg px-3 py-2 text-sm font-medium text-stone-600 hover:bg-stone-200/60 dark:text-stone-400 dark:hover:bg-stone-800">Home</a>
+    </header>
+
+    <main class="mx-auto grid max-w-5xl gap-6 px-4 pb-16 lg:grid-cols-[1fr_20rem]">
+      <section class="card" aria-labelledby="note-heading">
+        <h1 id="note-heading" class="text-xl font-semibold">New note</h1>
+
+        <form id="note-form" class="mt-5 grid gap-4">
+          <div>
+            <label for="title" class="label">Title</label>
+            <input id="title" name="title" maxlength="200" autocomplete="off" placeholder="Meeting with Priya" class="field">
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button type="button" id="record" aria-pressed="false">
+              <span id="record-label">Record</span>
+            </button>
+            <span id="record-timer" class="text-sm tabular-nums text-stone-500 dark:text-stone-400" aria-hidden="true"></span>
+          </div>
+
+          <div>
+            <label for="body" class="label">Note</label>
+            <textarea id="body" name="body" rows="12" required placeholder="Click Record, or type here." class="field leading-relaxed"></textarea>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-end">
+            <div>
+              <label for="folder" class="label">Save to folder</label>
+              <select id="folder" required class="field"></select>
+            </div>
+            <button type="submit" class="btn-primary">Save as .txt</button>
+          </div>
+        </form>
+
+        <p id="status" role="status" aria-live="polite" class="mt-4 min-h-6 text-sm text-stone-600 dark:text-stone-400"></p>
+      </section>
+
+      <aside class="card h-fit" aria-labelledby="folders-heading">
+        <h2 id="folders-heading" class="text-lg font-semibold">Folders</h2>
+        <p class="mt-1 text-sm text-stone-500 dark:text-stone-400">Notes are saved in these folders.</p>
+
+        <ul id="folder-list" class="mt-4 grid gap-2"></ul>
+
+        <form id="folder-form" class="mt-6 grid gap-4 border-t border-stone-200 pt-6 dark:border-stone-800">
+          <div>
+            <label for="folder-path" class="label">Absolute folder path</label>
+            <input id="folder-path" required placeholder="/Users/you/Documents/Notes" autocomplete="off" class="field">
+          </div>
+          <div>
+            <label for="folder-name" class="label">Name (optional)</label>
+            <input id="folder-name" maxlength="120" autocomplete="off" class="field">
+          </div>
+          <button type="submit" class="btn-primary">Add folder</button>
+        </form>
+      </aside>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
