@@ -6,6 +6,10 @@ Dhwani (ध्वनि) means sound in Hindi and Sanskrit. It is a self-hosted 
 - **Plain files:** each note is a `.txt` file. No notes database, no lock-in.
 - **Simple stack:** Python 3.12, FastAPI, vanilla JavaScript, Tailwind CSS.
 
+![Dhwani homepage](docs/images/homepage.png)
+
+**Tags:** `voice-notes` `speech-to-text` `note-taking` `self-hosted` `privacy` `offline` `local-first` `fastapi` `python` `tailwindcss` `whistle` `transcription`
+
 ## Contents
 
 - [Architecture](#architecture)
