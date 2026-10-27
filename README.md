@@ -245,3 +245,7 @@ The suite covers folder rules, file names and writes, the API, and WAV parsing. 
 - A file write is not atomic. A crash in the middle can leave a partial file.
 - No search across folders.
 - The styling needs the Tailwind CDN. Without it, pages load unstyled.
+
+---
+
+Made by Snehal Dutta · [LinkedIn](https://www.linkedin.com/in/snehal-python)
